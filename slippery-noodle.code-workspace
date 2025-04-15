@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+    ],
+    "settings": {
+        "autominify.enableJSMinification": false,
+        "autominify.jsMinifierOptions": {
+            "mangle": false
+        }
+    }
+}

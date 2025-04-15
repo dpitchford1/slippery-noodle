@@ -1,0 +1,31 @@
+/* 
+ * Responsive mixins
+ */
+
+@use '../variables' as vars;
+
+// Media up mixin
+@mixin media-up($breakpoint) {
+  @if map-has-key(vars.$breakpoints, $breakpoint) {
+    @media (min-width: map-get(vars.$breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $breakpoint) {
+      @content;
+    }
+  }
+}
+
+// Media down mixin
+@mixin media-down($breakpoint) {
+  @if map-has-key(vars.$breakpoints, $breakpoint) {
+    @media (max-width: map-get(vars.$breakpoints, $breakpoint) - 1px) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $breakpoint - 1px) {
+      @content;
+    }
+  }
+}

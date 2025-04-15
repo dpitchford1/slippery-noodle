@@ -1,37 +1,47 @@
-// Import variables
-@import 'variables';
+// Main entry point for non-critical styles
 
-// Global styles (non-critical)
-body {
-  line-height: 1.6;
-}
+// Foundation
+@use 'variables' as vars;
+@use 'mixins';
 
-a {
-  color: var(--color-primary);
-  text-decoration: none;
-  transition: color var(--transition-speed) ease;
-  
-  &:hover {
-    color: darken(var(--color-primary), 10%);
-    text-decoration: underline;
+// Base styles 
+@use 'base';
+
+// Theme
+@use 'themes';
+
+// Components
+@use 'components';
+
+header {
+    background-color: vars.$color-primary;
+    color: white;
+    padding: vars.$spacing-md 0;
+    
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    
+    nav {
+      margin-top: 0.5rem;
+      
+      ul {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      
+      a {
+        color: white;
+        text-decoration: none;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
-}
 
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 var(--spacing-md);
-}
-
-// Utility classes
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
-}

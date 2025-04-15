@@ -1,0 +1,86 @@
+@use '../variables' as vars;
+
+/* 
+ * Button component styles
+ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: vars.$spacing-sm vars.$spacing-md;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: vars.$border-radius;
+  cursor: pointer;
+  transition: all vars.$transition-speed ease-in-out;
+  
+  &:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(var(--color-primary-rgb), 0.25);
+  }
+  
+  &:disabled {
+    opacity: 0.65;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  
+  // Button variants
+  &--primary {
+    background-color: var(--color-primary);
+    color: white;
+    
+    &:hover:not(:disabled) {
+      filter: brightness(0.9);
+    }
+  }
+  
+  &--secondary {
+    background-color: transparent;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    
+    &:hover:not(:disabled) {
+      background-color: rgba(var(--color-primary-rgb), 0.05);
+    }
+  }
+  
+  &--text {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--color-primary);
+    padding: 0.5rem;
+    
+    &:hover, &:focus {
+      text-decoration: underline;
+    }
+  }
+  
+  // Button sizes
+  &--sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+  }
+  
+  &--lg {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+  }
+  
+  // Icon button
+  &--icon {
+    padding: 0.5rem;
+    border-radius: 50%;
+    
+    svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+}

@@ -1,23 +1,62 @@
-// Base variables
-:root {
-  // Colors
-  --color-primary: #3b82f6;
-  --color-secondary: #10b981;
-  --color-text: #333333;
-  --color-background: #ffffff;
-  
-  // Typography
-  --font-family-base: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-  --font-size-base: 16px;
-  
-  // Spacing
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  
-  // Other
-  --border-radius: 0.25rem;
-  --transition-speed: 0.2s;
+// Variables that will be used throughout the application
+
+// Colors
+$color-primary: #3b82f6;
+$color-primary-rgb: 59, 130, 246;
+$color-secondary: #10b981;
+$color-secondary-rgb: 16, 185, 129;
+$color-text: #333333;
+$color-text-light: #666666;
+$color-background: #ffffff;
+$color-background-alt: #f9fafb;
+$color-border: #e5e7eb;
+
+// Typography
+$font-family-base: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+$font-size-base: 16px;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+// Breakpoints
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px
+);
+
+// Other
+$border-radius: 0.25rem;
+$transition-speed: 0.2s;
+
+// This mixin can be used to export CSS variables when needed
+@mixin export-css-vars {
+  :root {
+    --color-primary: #{$color-primary};
+    --color-primary-rgb: #{$color-primary-rgb};
+    --color-secondary: #{$color-secondary};
+    --color-secondary-rgb: #{$color-secondary-rgb};
+    --color-text: #{$color-text};
+    --color-text-light: #{$color-text-light};
+    --color-background: #{$color-background};
+    --color-background-alt: #{$color-background-alt};
+    --color-border: #{$color-border};
+    
+    --font-family-base: #{$font-family-base};
+    --font-size-base: #{$font-size-base};
+    
+    --spacing-xs: #{$spacing-xs};
+    --spacing-sm: #{$spacing-sm};
+    --spacing-md: #{$spacing-md};
+    --spacing-lg: #{$spacing-lg};
+    --spacing-xl: #{$spacing-xl};
+    
+    --border-radius: #{$border-radius};
+    --transition-speed: #{$transition-speed};
+  }
 }

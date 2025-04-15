@@ -1,7 +1,10 @@
 <script lang="ts">
-  // Import global styles (non-critical)
-  import '$styles/global.scss';
-</script>
+    // Import styles in a way that allows them to be extracted
+    import '../styles/global.scss';
+  </script>
+  
+  <!-- Remove the conditional external stylesheet reference that's causing the 404 -->
+  
 
 <div class="app">
   <header>
@@ -10,6 +13,7 @@
       <nav>
         <ul>
           <li><a href="/">Dashboard</a></li>
+          <li><a href="/style-guide">Style Guide</a></li>
           <li><a href="/settings">Settings</a></li>
         </ul>
       </nav>
@@ -17,9 +21,7 @@
   </header>
   
   <main>
-    <div class="container">
-      <slot />
-    </div>
+    <slot />
   </main>
   
   <footer>
@@ -29,40 +31,6 @@
   </footer>
 </div>
 
-<style lang="scss">
-  header {
-    background-color: var(--color-primary);
-    color: white;
-    padding: var(--spacing-md) 0;
-    
-    h1 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-    
-    nav {
-      ul {
-        display: flex;
-        gap: var(--spacing-md);
-        list-style: none;
-        padding: 0;
-        margin: var(--spacing-sm) 0 0;
-        
-        a {
-          color: white;
-          
-          &:hover {
-            color: rgba(255, 255, 255, 0.8);
-          }
-        }
-      }
-    }
-  }
-  
-  footer {
-    margin-top: var(--spacing-xl);
-    padding: var(--spacing-md) 0;
-    border-top: 1px solid #eee;
-    color: #666;
-  }
+<style>
+  /* Component-specific styles here */
 </style>

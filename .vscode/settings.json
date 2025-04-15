@@ -1,0 +1,7 @@
+{
+    "autominify.enableJSMinification": false,
+    "autominify.jsMinifierOptions": {
+        
+        "mangle": false
+    }
+}
