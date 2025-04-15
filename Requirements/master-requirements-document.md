@@ -136,7 +136,7 @@
 
 1. **Platform**:
    - Local development environment on Mac using MAMP or standalone server.
-   - Should run as a background service or daemon for always-on functionality.
+   - On-demand startup via simple script rather than always-on background service.
    - No external access or authentication required.
 
 2. **Performance**:

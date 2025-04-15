@@ -1,155 +1,132 @@
-# Implementation Task List
+# Slippery Noodle Implementation Tasklist
 
-## Phase 1: Foundation
+## Project Setup
 
-### Project Initialization
-- [ ] Set up GitHub repository
-- [ ] Initialize React frontend project
-- [ ] Initialize Node.js backend project
-- [ ] Configure ESLint and Prettier
-- [ ] Set up Git hooks for code quality
-- [ ] Create initial README.md with project overview
+- [ ] Initialize SvelteKit project using `npm create svelte@latest slippery-noodle`
+- [ ] Configure TypeScript
+- [ ] Set up SCSS integration
+  - [ ] Install SCSS dependencies
+  - [ ] Create base variable files for tokens
+  - [ ] Configure global styles
+  - [ ] Set up theme system with CSS custom properties
+  - [ ] Implement CSS inlining strategy
+    - [ ] Create dedicated inline.scss file for critical styles
+    - [ ] Configure build script to extract and inject into app.html
+    - [ ] Set up async loading for non-critical styles
+    - [ ] Document guidelines for what belongs in inline.scss
+- [ ] Configure Vitest and Playwright for testing
+- [ ] Set up ESLint and Prettier
+- [ ] Create initial project structure following SvelteKit conventions
+- [ ] Configure build scripts and deployment options
 
-### Development Environment
-- [ ] Set up local development server
-- [ ] Configure database connection
-- [ ] Create docker-compose or development scripts
-- [ ] Configure environment variables
-- [ ] Set up build process
-- [ ] Create development/production configurations
+All the above checked.
 
-### Core Architecture
-- [ ] Design database schema
-- [ ] Create basic API structure
-- [ ] Implement widget framework
-- [ ] Set up state management
-- [ ] Create layout system for dashboard
-- [ ] Implement basic routing
-- [ ] Design component communication pattern
+## Core Framework Setup
 
-## Phase 2: Core Components
+- [ ] Implement basic page layouts (root layout, dashboard layout)
+- [ ] Configure routing structure
+- [ ] Set up server endpoints for data handling
+- [ ] Implement progressive enhancement strategy 
+- [ ] Create base component library
+  - [ ] Button
+  - [ ] Card
+  - [ ] Input fields
+  - [ ] Modal
+  - [ ] Dropdown
+  - [ ] Toast notifications
 
-### Todo List Component
-- [ ] Database models for todos
-- [ ] API endpoints for CRUD operations
-- [ ] Frontend component implementation
-- [ ] Task prioritization features
-- [ ] Grouping functionality
-- [ ] Drag-and-drop reordering
-- [ ] Task completion history
+## Dashboard Foundation
 
-### Weather Component
-- [ ] Research and select weather API
-- [ ] Implement API service
-- [ ] Create UI component
-- [ ] Add sunrise/sunset features
-- [ ] Implement manual refresh functionality
-- [ ] Add location selection
-- [ ] Implement caching strategy
+- [ ] Create responsive dashboard grid layout
+  - [ ] Desktop layout
+  - [ ] Tablet layout
+  - [ ] Mobile layout
+- [ ] Implement dashboard store using Svelte stores
+- [ ] Create dashboard persistence layer with IndexedDB/Dexie
+- [ ] Add dashboard settings panel
+- [ ] Implement theme switching capabilities
 
-### News Component
-- [ ] Implement RSS parser service
-- [ ] Create news category management
-- [ ] Design and implement UI component
-- [ ] Add refresh functionality
-- [ ] Implement feed management
-- [ ] Create article preview functionality
-- [ ] Set up caching for offline reading
+## Widget System
 
-### Directory Scraper
-- [ ] Implement file system service
-- [ ] Create project listing component
-- [ ] Add open-in-browser functionality
-- [ ] Implement folder navigation
-- [ ] Create file preview capabilities
-- [ ] Add favorite projects feature
+- [ ] Design widget component interface
+- [ ] Create base widget component class
+- [ ] Implement widget container component
+  - [ ] Widget header with drag handle
+  - [ ] Widget content area
+  - [ ] Widget settings button
+- [ ] Create widget registry store
+- [ ] Implement drag and drop functionality using svelte-dnd-action
+- [ ] Add widget resize capabilities
+- [ ] Create widget persistence layer
+- [ ] Implement widget settings modal
 
-## Phase 3: Advanced Components
+## Plugin System
 
-### Sports Scores Component
-- [ ] Research and integrate sports API
-- [ ] Create team selection interface
-- [ ] Implement scores display
-- [ ] Add standings view
-- [ ] Create game schedule display
-- [ ] Implement team statistics
-- [ ] Set up notifications for game events
+- [ ] Define plugin interface
+- [ ] Create plugin registry
+- [ ] Implement plugin lifecycle hooks
+  - [ ] Installation
+  - [ ] Initialization
+  - [ ] Destruction
+- [ ] Design extension points system
+- [ ] Create plugin settings UI
+- [ ] Implement plugin store in IndexedDB
+- [ ] Add plugin installation mechanism
+- [ ] Create sample plugins
+  - [ ] Clock widget
+  - [ ] Weather widget
+  - [ ] Todo list widget
+  - [ ] Notes widget
 
-### Job Postings Component
-- [ ] Research job board API options
-- [ ] Implement filter mechanisms
-- [ ] Create job listing component
-- [ ] Add location filtering
-- [ ] Implement job title filtering
-- [ ] Create saved searches functionality
-- [ ] Add job application tracking
+## Data Layer
 
-### Quick Command Executor
-- [ ] Design safe execution environment
-- [ ] Implement command execution service
-- [ ] Create command input interface
-- [ ] Add predefined command shortcuts
-- [ ] Implement command history
-- [ ] Create output display
-- [ ] Add command favorites
+- [ ] Implement core data stores
+- [ ] Create API adapter pattern for external services
+- [ ] Design caching strategy
+- [ ] Implement SvelteQuery integration
+- [ ] Create form actions for JS-free operations
+- [ ] Build data synchronization system
+  - [ ] Change detection
+  - [ ] Conflict resolution
+  - [ ] Offline support
 
-### Frontend Reference Guide
-- [ ] Design snippet storage schema
-- [ ] Implement snippet CRUD operations
-- [ ] Create categorization system
-- [ ] Build search functionality
-- [ ] Implement syntax highlighting
-- [ ] Add tagging system
-- [ ] Create snippet import/export
+## Authentication and User Management
 
-## Phase 4: Enhancement
+- [ ] Design authentication flow
+- [ ] Implement login/register forms
+- [ ] Create secure session handling
+- [ ] Add user preferences store
+- [ ] Implement user settings page
+- [ ] Add multi-device sync capability
 
-### Performance Optimization
-- [ ] Implement caching strategy
-- [ ] Optimize component rendering
-- [ ] Add lazy loading for components
-- [ ] Analyze and fix render bottlenecks
-- [ ] Optimize database queries
-- [ ] Implement resource cleanup
-- [ ] Add performance monitoring
+## Testing
 
-### User Experience
-- [ ] Implement dark mode toggle
-- [ ] Add drag-and-drop for widget positioning
-- [ ] Create responsive layouts
-- [ ] Design and implement widget settings
-- [ ] Add keyboard shortcuts
-- [ ] Create onboarding experience
-- [ ] Implement custom themes
+- [ ] Create component test suite
+- [ ] Implement integration tests
+- [ ] Add end-to-end tests with Playwright
+- [ ] Create test fixtures and mocks
+- [ ] Implement accessibility tests
 
-### Testing and QA
-- [ ] Write unit tests for critical components
-- [ ] Perform integration testing
-- [ ] Fix identified bugs
-- [ ] Test across different screen sizes
-- [ ] Conduct usability testing
-- [ ] Document test cases
-- [ ] Create automated test suite
+## Optimization and Performance
 
-## Phase 5: Future Features
+- [ ] Optimize bundle size
+- [ ] Implement lazy loading for widgets and plugins
+- [ ] Add asset optimization
+- [ ] Improve loading times and core web vitals
+- [ ] Implement service worker for offline support
 
-### Bookmarks Manager
-- [ ] Design database schema for bookmarks
-- [ ] Implement CRUD operations
-- [ ] Create folder structure
-- [ ] Implement import/export functionality
-- [ ] Add browser extension integration
+## Documentation
 
-### Notes Component
-- [ ] Create notes database schema
-- [ ] Implement rich text editor
-- [ ] Add categorization system
-- [ ] Create search functionality
-- [ ] Implement markdown support
+- [ ] Create developer documentation
+- [ ] Write user guides
+- [ ] Document plugin API
+- [ ] Add inline code documentation
+- [ ] Create setup and deployment guides
 
-### Stock Market Feed
-- [ ] Research stock API options
-- [ ] Create watchlist functionality
-- [ ] Implement stock charts
-- [ ] Add portfolio tracking
-- [ ] Create alert system
+## Deployment
+
+- [ ] Configure production build process
+- [ ] Set up CI/CD pipeline
+- [ ] Create Docker configuration
+- [ ] Implement database migrations
+- [ ] Configure server-side caching

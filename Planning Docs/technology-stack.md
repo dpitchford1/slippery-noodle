@@ -39,7 +39,7 @@
 |-------------|-------------------|---------------|
 | Modular Components | React.js | Component-based architecture allows each dashboard widget to be developed independently |
 | Local Database | SQLite | Lightweight, file-based database perfect for single-user applications with no authentication |
-| Always-on Service | PM2/Electron | Provides process management to keep the application running in the background |
+| On-Demand Service | Simple npm scripts | Provides straightforward startup process without overhead of background services |
 | External Data Sources | Axios + Custom APIs | Flexible HTTP client for integrating with various external APIs |
 | Manual Refresh | React State | State management allows for manual refresh triggers without complex polling |
 | Directory Scanning | Node.js fs module | Native filesystem access for directory scanning functionality |

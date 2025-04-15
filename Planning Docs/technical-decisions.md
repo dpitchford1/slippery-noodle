@@ -1,115 +1,151 @@
-# Technical Decisions & Considerations
+# Slippery Noodle Technical Decisions
 
-## Data Storage Strategy
+This document outlines key technical decisions made for the Slippery Noodle project and the rationale behind them.
 
-### Primary Database: SQLite
-- **Rationale**: Lightweight, file-based, perfect for single-user application
-- **Implementation**: 
-  - Use Sequelize ORM for structured data access
-  - Implement migrations for schema evolution
-  - Regular backups to prevent data loss
+## Framework Selection: SvelteKit
 
-### Component-Specific Storage
-- **Todo List**: SQLite tables with relationships for tasks and groups
-- **News Feed**: Cache RSS content in SQLite with TTL
-- **Weather**: Short-term memory cache with periodic updates
-- **Reference Guide**: SQLite for snippets with full-text search capabilities
-- **Command Executor**: File-based history with limited retention
+**Decision**: Use SvelteKit as the primary framework for both frontend and backend.
 
-### Caching Strategy
-- In-memory cache for frequently accessed data
-- Filesystem cache for API responses
-- Implement stale-while-revalidate pattern for UI responsiveness
+**Rationale**:
+- **Progressive Enhancement**: SvelteKit provides excellent support for server-side rendering and progressive enhancement, ensuring the application works even without JavaScript.
+- **HTML-First Approach**: Svelte's template syntax keeps HTML structure visible and easy to understand, unlike JSX which embeds HTML in JavaScript.
+- **Performance**: Svelte compiles to highly optimized vanilla JavaScript with minimal runtime overhead.
+- **Developer Experience**: Clean, concise syntax with less boilerplate than React or Vue.
+- **Form Actions**: Built-in support for handling form submissions without JavaScript.
+- **File-based Routing**: Intuitive routing structure that simplifies organization.
 
-## API Integration Approach
+**Alternatives Considered**:
+- **React + Next.js**: More established but less HTML-centric and generally requires JavaScript for core functionality.
+- **Vue + Nuxt**: Good template syntax but larger runtime and less performance-focused than Svelte.
 
-### External API Adapters
-- Create adapter pattern for each external API
-- Abstract common functionality (authentication, rate limiting)
-- Implement retry mechanisms and graceful degradation
-- Use appropriate caching based on data volatility
+## TypeScript Integration
 
-### API Selection Criteria
-1. Documentation quality and completeness
-2. Rate limits and pricing tiers
-3. Data freshness and update frequency
-4. Authentication requirements
-5. Community support and reliability
+**Decision**: Use TypeScript throughout the project.
 
-### API Categories and Options
+**Rationale**:
+- Provides type safety and improved developer tooling
+- Better documentation through type definitions
+- Easier refactoring and code navigation
+- Particularly valuable for plugin system interfaces
 
-| Category | Primary Option | Fallback Option | Considerations |
-|----------|---------------|-----------------|----------------|
-| Weather | OpenWeatherMap | WeatherAPI | Free tier limits, location accuracy |
-| Sports | ESPN API | Sports Data IO | Game coverage, update frequency |
-| News | RSS Feeds | NewsAPI | Source variety, content formatting |
-| Jobs | LinkedIn API | Indeed API | Authentication requirements |
+## UI Component Framework
 
-## System Integration
+**Decision**: Build custom components without an external component library, using vanilla CSS with SCSS.
 
-### Command Execution
-- Use Node.js child_process with proper sanitization
-- Implement allowlist of permitted commands
-- Log all execution attempts for security
-- Sandbox execution environment
+**Rationale**:
+- **Customization**: Full control over component design and behavior
+- **Bundle Size**: Avoid large UI library dependencies
+- **Consistency**: Maintain design consistency through a custom component library
+- **Clean HTML**: Keep markup semantic and free from utility classes
+- **Maintainable CSS**: Use SCSS to organize styles in a component-oriented way
 
-### File System Access
-- Restricted to specific directories
-- Use proper error handling for permissions
-- Implement file watching for directory changes
-- Cache directory contents with invalidation
+**Alternatives Considered**:
+- **Tailwind CSS**: Creates HTML bloat despite popularity
+- **SvelteUI/Melt UI**: Good but would constrain design choices
+- **Skeleton**: Adds unnecessary overhead for our specific needs
 
-### Browser Integration
-- Use URL protocol handlers for opening links
-- Implement clipboard integration for snippets
-- Consider browser extension for deeper integration
+## State Management
 
-## Deployment Options
+**Decision**: Use Svelte's built-in stores for state management.
 
-### Option 1: Basic Setup (Recommended for v1)
-- Run as localhost service with PM2
-- Configure as startup service
-- Access via browser bookmark
-- Pros: Simple setup, minimal dependencies
-- Cons: Limited system integration
+**Rationale**:
+- Native to Svelte with optimal integration
+- Simple, reactive API that's easy to understand
+- Sufficient for our needs without additional libraries
+- Component-specific stores can be created for widget isolation
 
-### Option 2: Enhanced Desktop Experience
-- Package as Electron app
-- System tray integration
-- Native notifications
-- Pros: Better system integration, standalone application
-- Cons: Larger footprint, additional complexity
+## Data Fetching
 
-### Option 3: Development Only
-- Run manually during development sessions
-- No background service
-- Pros: Simplest setup
-- Cons: Must be manually started, no background functionality
+**Decision**: Use SvelteQuery (TanStack Query for Svelte) for data fetching.
 
-## Performance Considerations
+**Rationale**:
+- Caching and background refreshing capabilities
+- Request deduplication
+- Loading/error states management
+- Pairs well with SvelteKit's server endpoints
 
-### Frontend Optimization
-- Implement code splitting for components
-- Use React.memo for expensive renders
-- Virtual scrolling for long lists
-- Web workers for intensive operations
+## Local Storage Strategy
 
-### Backend Optimization
-- Efficient database queries with proper indexing
-- Connection pooling
-- Request batching where appropriate
-- Background processing for long-running tasks
+**Decision**: Use IndexedDB via Dexie.js.
 
-## Extensibility Design
+**Rationale**:
+- Better performance than localStorage for larger datasets
+- Transactional database operations
+- Support for complex data structures
+- Offline-first capabilities
 
-### Plugin Architecture
-- Define standard widget interface
-- Component registry for dynamic loading
-- Standardized event communication
-- Settings schema for configuration
+## Testing Framework
 
-### Configuration Management
-- User preferences stored in database
-- Component-specific settings
-- Export/import configuration
-- Default settings with override capability
+**Decision**: Vitest for unit/component testing and Playwright for E2E testing.
+
+**Rationale**:
+- **Vitest**: Fast, ESM-native testing with excellent Svelte integration
+- **Playwright**: Cross-browser testing with strong debugging capabilities
+- Both integrate well with SvelteKit projects
+
+## Styling Approach
+
+**Decision**: Vanilla CSS with SCSS for organization and custom properties for theming.
+
+**Rationale**:
+- **CSS Cascade**: Leverages the cascade as intended rather than utility classes
+- **Clean HTML**: Keeps markup semantic and free from presentational classes
+- **SCSS Organization**: Uses SCSS for nesting, variables, and modularization
+- **Custom Properties**: Implements theme tokens via CSS variables for runtime customization
+- **Performance**: Smaller CSS footprint compared to utility-first frameworks
+- **Maintainability**: Easier to understand component styling relationships
+- **Future-Proof**: Follows standard CSS practices rather than framework-specific patterns
+
+**Alternatives Considered**:
+- **Tailwind CSS**: Popular but creates HTML bloat and fights against the cascade
+- **CSS Modules**: Good for scoping but adds complexity to the build process
+- **CSS-in-JS**: Too JavaScript-dependent for our progressive enhancement goals
+- **Pure CSS**: Lacks the organization benefits that SCSS provides
+
+## CSS Performance Optimization
+
+**Decision**: Implement controlled CSS inlining with dedicated inline.scss file.
+
+**Rationale**:
+- **Precise Control**: Explicitly determine which styles are critical, rather than relying on automated extraction
+- **Predictable Results**: Avoid the unpredictability of automated critical CSS tools
+- **Smaller Payload**: Manual curation typically results in leaner critical CSS
+- **Faster Initial Render**: Critical styles are immediately available without waiting for CSS files to load
+- **Progressive Enhancement**: Ensures basic styling even before external stylesheets load
+
+**Implementation Approach**:
+- Create dedicated inline.scss file containing only critical styles
+- Build process compiles this to inline.css
+- Build script extracts contents and injects into app.html's <head> section
+- Remaining styles loaded asynchronously through standard <link> tags
+- Clear guidelines for developers on what belongs in inline.scss
+
+## Build and Bundling
+
+**Decision**: Use SvelteKit's built-in Vite configuration.
+
+**Rationale**:
+- Optimized for Svelte components
+- Fast HMR during development
+- Efficient code splitting
+- Modern bundling techniques
+
+## Deployment Strategy
+
+**Decision**: Static generation with optional API endpoints via serverless functions.
+
+**Rationale**:
+- Excellent performance for static content
+- Reduced server costs
+- Simple scaling
+- Flexibility to add dynamic API endpoints as needed
+
+## Plugin Architecture
+
+**Decision**: Custom plugin system using dynamic imports and standard interfaces.
+
+**Rationale**:
+- No suitable off-the-shelf solutions for our specific needs
+- Need for tight integration with our widget system
+- Control over security aspects of plugin loading
+- Ability to customize the development experience for plugin creators
